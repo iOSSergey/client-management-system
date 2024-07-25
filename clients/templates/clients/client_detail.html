@@ -2,30 +2,64 @@
 
 {% block title %}Client Details{% endblock %}
 
+{% block sidebar %}
+    <h2>Client Actions</h2>
+    <p>Manage the information and activities related to this client.</p>
+    <ul>
+        <li><a href="#">Edit Client Info</a></li> <!-- Modify client details and information -->
+        <li><a href="#">Add New Trip</a></li> <!-- Add a new trip for this client -->
+    </ul>
+
+    <h2>Navigation</h2>
+    <p>Navigate through the client management system.</p>
+    <ul>
+        <li><a href="#">Search Clients</a></li> <!-- Search for clients in the system -->
+        <li><a href="#">Add New Client</a></li> <!-- Add a new client to the system -->
+    </ul>
+
+    <h2>Quick Actions</h2>
+    <p>Perform common actions quickly related to this client.</p>
+    <ul>
+        <li><a href="#">Export Data</a></li> <!-- Export the client's data to a file -->
+        <li><a href="mailto:{{ client.email }}">Send Email</a></li> <!-- Send an email to the client -->
+        {% if client.mobile_phone %}
+            <li><a href="sms:+{{ client.mobile_phone }}">Send SMS</a></li> <!-- Send an SMS to the client if a mobile phone is available -->
+        {% endif %}
+    </ul>
+
+    <h2>Client Summary</h2>
+    <p>Overview of key information about this client.</p>
+    <div><strong>Name:</strong> {{ client.first_name }} {{ client.last_name }}</div> <!-- Client's full name -->
+    <div><strong>City:</strong> {{ client.city }}</div> <!-- City where the client resides -->
+    <div><strong>Age:</strong> {{ client.age_with_suffix }}</div> <!-- Client's age with suffix (e.g., "years") -->
+    <div><strong>Number of Trips:</strong> {{ client.trip_count }}</div> <!-- Total number of trips this client has made -->
+{% endblock %}
+
+
 {% block content %}
 <div class="client-details">
-    <h1>Client Details</h1>
+    <h1>{{ client.last_name }}, {{ client.first_name }} {{ client.middle_name }}</h1>
     <div class="client-info">
-        <p><strong>Last Name:</strong> {{ client.last_name }}</p>
-        <p><strong>First Name:</strong> {{ client.first_name }}</p>
-        <p><strong>Middle Name:</strong> {{ client.middle_name }}</p>
-        <p><strong>Age:</strong> {{ client.age_with_suffix }}</p>
-        <p><strong>Mailing Name:</strong> {{ client.mailing_name }}</p>
-        <p><strong>Postal Code:</strong> {{ client.postal_code }}</p>
-        <p><strong>Country:</strong> {{ client.country }}</p>
-        <p><strong>Region:</strong> {{ client.region }}</p>
-        <p><strong>City:</strong> {{ client.city }}</p>
-        <p><strong>Address:</strong> {{ client.address }}</p>
-        <p><strong>Work Phone:</strong> {{ client.work_phone }}</p>
-        <p><strong>Home Phone:</strong> {{ client.home_phone }}</p>
-        <p><strong>Mobile Phone:</strong> {{ client.mobile_phone }}</p>
-        <p><strong>Birth Date:</strong> {{ client.birth_date }}</p>
-        <p><strong>Passport Number:</strong> {{ client.passport_number }}</p>
-        <p><strong>Salutation:</strong> {{ client.salutation }}</p>
-        <p><strong>Comments:</strong> {{ client.comments }}</p>
-        <p><strong>Email:</strong> {{ client.email }}</p>
-        <p><strong>Send Email:</strong> {{ client.send_email }}</p>
-        <p><strong>Is Active:</strong> {{ client.is_active }}</p>
+        <div><strong>Last Name:</strong> {{ client.last_name }}</div>
+        <div><strong>First Name:</strong> {{ client.first_name }}</div>
+        <div><strong>Middle Name:</strong> {{ client.middle_name }}</div>
+        <div><strong>Age:</strong> {{ client.age_with_suffix }}</div>
+        <div><strong>Mailing Name:</strong> {{ client.mailing_name }}</div>
+        <div><strong>Postal Code:</strong> {{ client.postal_code }}</div>
+        <div><strong>Country:</strong> {{ client.country }}</div>
+        <div><strong>Region:</strong> {{ client.region }}</div>
+        <div><strong>City:</strong> {{ client.city }}</div>
+        <div><strong>Address:</strong> {{ client.address }}</div>
+        <div><strong>Work Phone:</strong> {{ client.work_phone }}</div>
+        <div><strong>Home Phone:</strong> {{ client.home_phone }}</div>
+        <div><strong>Mobile Phone:</strong> {{ client.mobile_phone }}</div>
+        <div><strong>Birth Date:</strong> {{ client.birth_date }}</div>
+        <div><strong>Passport Number:</strong> {{ client.passport_number }}</div>
+        <div><strong>Salutation:</strong> {{ client.salutation }}</div>
+        <div><strong>Comments:</strong> {{ client.comments }}</div>
+        <div><strong>Email:</strong> {{ client.email }}</div>
+        <div><strong>Send Email:</strong> {{ client.send_email }}</div>
+        <div><strong>Is Active:</strong> {{ client.is_active }}</div>
     </div>
 
     <h2>Trips</h2>
