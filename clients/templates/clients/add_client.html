@@ -1,0 +1,21 @@
+{% extends 'clients/base.html' %}
+
+{% block title %}Add New Client{% endblock %}
+
+{% block sidebar %}
+<h2>Client Details:</h2>
+<ul>
+    <li><a href="#">Form Instructions</a></li>
+    <li><a href="#">Help</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<h1>Add New Client</h1>
+<!-- Form for adding a new client -->
+<form method="post" action="{% url 'add_client' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Client</button>
+</form>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'trips/base.html' %}
+
+{% block content %}
+  <h2>Trip List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Destination</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Accommodation</th>
+        <th>Price</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for trip in trips %}
+        <tr>
+          <td>{{ trip.destination }}</td>
+          <td>{{ trip.start_date }}</td>
+          <td>{{ trip.end_date }}</td>
+          <td>{{ trip.accommodation }}</td>
+          <td>{{ trip.price }}</td>
+          <td>{{ trip.notes }}</td>
+          <td>
+            <a href="{% url 'trip_update' trip.pk %}">Edit</a>
+            <a href="{% url 'trip_delete' trip.pk %}">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'trip_create' client.id %}">Add New Trip</a>
+{% endblock %}
