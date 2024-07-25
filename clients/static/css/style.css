@@ -160,3 +160,117 @@ table th {
   color: #3c763d;
   border: 1px solid #d6e9c6;
 }
+
+/* Дополнительные стили для страницы Client Details */
+.client-details {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.client-info p {
+  margin: 10px 0;
+  font-size: 1em;
+}
+
+.client-info strong {
+  font-weight: bold;
+}
+
+.trip-table {
+  margin-top: 20px;
+}
+
+.trip-table th, .trip-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.trip-table th {
+  background-color: #e9ecef;
+}
+
+.trip-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Стили для кнопки "Add New Trip" */
+.add-trip-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #6c757d; /* Средний серый цвет фона */
+  color: #fff; /* Белый цвет текста */
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.add-trip-button:hover {
+  background-color: #5a6268; /* Более темный оттенок серого для эффекта наведения */
+}
+
+/* Стили для кнопки "Add New Trip" */
+.add-trip-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #6c757d; /* Средний серый цвет фона */
+  color: #fff; /* Белый цвет текста */
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.add-trip-button:hover {
+  background-color: #5a6268; /* Более темный оттенок серого для эффекта наведения */
+}
+
+/* Стили для кнопки "Add New Trip" */
+.add-trip-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #6c757d; /* Средний серый цвет фона */
+  color: #fff; /* Белый цвет текста */
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.add-trip-button:hover {
+  background-color: #5a6268; /* Более темный оттенок серого для эффекта наведения */
+}
+
+/* Стили для ссылок Edit и Delete */
+.action-link {
+  display: inline-block;
+  margin: 5px;
+  padding: 5px;
+  text-decoration: none;
+  font-weight: normal; /* Уменьшенная жирность текста */
+  font-size: 14px;
+  border-radius: 3px; /* Меньший радиус скругления для простых ссылок */
+  color: #333; /* Основной цвет текста */
+}
+
+.action-link:hover {
+  text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+/* Стили для ссылки Edit */
+.action-link.edit {
+  color: #6c757d; /* Уменьшенная яркость серого для Edit */
+}
+
+.action-link.edit:hover {
+  color: #5a6268; /* Более темный оттенок серого для эффекта наведения */
+}
+
+/* Стили для ссылки Delete */
+.action-link.delete {
+  color: #dc3545; /* Темно-красный цвет текста для Delete */
+}
+
+.action-link.delete:hover {
+  color: #c82333; /* Более темный оттенок темно-красного для эффекта наведения */
+}
