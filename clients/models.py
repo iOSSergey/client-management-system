@@ -44,6 +44,9 @@ class Client(models.Model):
         else:
             return f"{age} years"
 
+    def trip_count(self):
+        return self.trips.count()
+
     # class Meta:
     #     db_table = 'ClientBase'
 
