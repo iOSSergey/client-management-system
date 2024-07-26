@@ -5,31 +5,76 @@
 {% block sidebar %}
 <h2>Select a Filter:</h2>
 <ul>
-    <li><a href="#">By Name</a></li>
-    <li><a href="#">By Date</a></li>
-    <li><a href="#">By Region</a></li>
+    <li>
+        {% if filter_by == 'name' %}
+            <strong>By Name</strong>
+        {% else %}
+            <a href="{% url 'search_clients' %}?filter=name">By Name</a>
+        {% endif %}
+    </li>
+    <li>
+        {% if filter_by == 'birthday' %}
+            <strong>By Birthday</strong>
+        {% else %}
+            <a href="{% url 'search_clients' %}?filter=birthday">By Birthday</a>
+        {% endif %}
+    </li>
+    <li>
+        {% if filter_by == 'region' %}
+            <strong>By Region</strong>
+        {% else %}
+            <a href="{% url 'search_clients' %}?filter=region">By Region</a>
+        {% endif %}
+    </li>
 </ul>
 {% endblock %}
 
 {% block content %}
-<h1>Search Clients</h1>
+<h1>
+    {% if filter_by == 'birthday' %}
+        Search Clients by Birthday
+    {% elif filter_by == 'region' %}
+        Search Clients by Region
+    {% else %}
+        Search Clients
+    {% endif %}
+</h1>
+
 <form method="get" action="{% url 'search_clients' %}">
-    <input type="text" name="q" placeholder="Search clients..." value="{{ query|default:'' }}">
+    <input type="hidden" name="filter" value="{{ filter_by }}">
+
+    {% if filter_by == 'birthday' %}
+        <label for="start_date">From:</label>
+        <input type="date" id="start_date" name="start_date" value="{{ start_date|default:'' }}">
+        <label for="end_date">To:</label>
+        <input type="date" id="end_date" name="end_date" value="{{ end_date|default:'' }}">
+    {% elif filter_by == 'name' or filter_by == 'region' %}
+        <input type="text" name="q" placeholder="Search clients..." value="{{ query|default:'' }}">
+    {% endif %}
+
     <button type="submit">Search</button>
 </form>
 
-{% if query %}
-    <h2>Search Results for "{{ query }}":</h2>
-    <ul>
-        {% for client in results %}
-            <li>
-                <a href="{% url 'client_detail' client.id %}">
-                    {{ client.last_name }} {{ client.first_name }} {{ client.middle_name }} - {{ client.age_with_suffix }}
-                </a>
-            </li>
-        {% empty %}
-            <li>No clients found.</li>
-        {% endfor %}
-    </ul>
+{% if query or start_date or end_date %}
+    {% if results %}
+        <h2>Search Results{% if query %} for "{{ query }}"{% endif %}:</h2>
+        <ul>
+            {% for client in results %}
+                <li>
+                    <a href="{% url 'client_detail' client.id %}">
+                        {{ client.last_name }} {{ client.first_name }} {{ client.middle_name }} - {{ client.age_with_suffix }}
+                    </a>
+                </li>
+            {% empty %}
+                <li>No clients found.</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        {% if filter_by == 'name' or filter_by == 'region' %}
+            <p>No results found for "{{ query }}"</p>
+        {% elif filter_by == 'birthday' %}
+            <p>No clients found for the selected date range.</p>
+        {% endif %}
+    {% endif %}
 {% endif %}
 {% endblock %}
