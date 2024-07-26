@@ -1,0 +1,25 @@
+{% extends 'clients/base.html' %}
+
+{% block title %}Top 20 Clients{% endblock %}
+
+{% block sidebar %}
+<h2>Select a Filter:</h2>
+<p>You can choose the client features or the features of the trip.</p>
+<ul>
+    <li><a href="{% url 'latest_clients' %}">Latest 5 Clients</a></li>
+    <li><strong>Top 20 Clients</strong></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<h1>Top 20 Clients by Number of Trips</h1>
+<ul>
+    {% for client in clients %}
+    <li>
+        <a href="{% url 'client_detail' client.id %}">
+            {{ client.last_name }} {{ client.first_name }} {{ client.middle_name|default_if_none:"" }} - {{ client.trip_count }} trips
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
