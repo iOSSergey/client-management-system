@@ -20,50 +20,39 @@ def client_detail(request, client_id):
     trips = client.trips.all()  # Get all trips of the client
     return render(request, 'clients/client_detail.html', {'client': client, 'trips': trips})
 
+
 def search_clients(request):
     # Get the filter type from the GET parameters, default to 'name' if not provided
     filter_by = request.GET.get('filter', 'name')
     # Get the search query from the GET parameters
     query = request.GET.get('q', '')
-    # Get date range parameters from the GET request
-    start_date_str = request.GET.get('start_date', '')
-    end_date_str = request.GET.get('end_date', '')
-
-    # Initialize the queryset
-    results = Client.objects.all()
+    
+    # Get date range for birthday filter
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
 
     if filter_by == 'name':
-        if query:
-            # Filter by last_name, first_name, and middle_name using multiple filter calls with OR conditions
-            results = results.filter(
-                last_name__icontains=query
-            ) | results.filter(
-                first_name__icontains=query
-            ) | results.filter(
-                middle_name__icontains=query
-            )
-        else:
-            results = Client.objects.none()  # Return no results if no query is provided
+        # Search by name, first name, middle name, or last name
+        results = Client.objects.filter(
+            last_name__icontains=query
+        ) | Client.objects.filter(
+            first_name__icontains=query
+        ) | Client.objects.filter(
+            middle_name__icontains=query
+        )
     elif filter_by == 'birthday':
-        if start_date_str and end_date_str:
-            try:
-                # Convert start_date and end_date to datetime.date objects
-                start_date = datetime.strptime(start_date_str, '%Y-%m-%d').date()
-                end_date = datetime.strptime(end_date_str, '%Y-%m-%d').date()
-                # Apply the date range filter
-                results = results.filter(birth_date__range=(start_date, end_date))
-            except ValueError as e:
-                # Log the error for debugging
-                print(f"Date conversion error: {e}")
-                results = Client.objects.none()
-        else:
-            results = Client.objects.none()
+        # Search by birth_date using the date range
+        results = Client.objects.filter(
+            birth_date__gte=start_date,
+            birth_date__lte=end_date
+        )
     elif filter_by == 'region':
-        if query:
-            results = results.filter(region__icontains=query)
-        else:
-            results = Client.objects.none()
+        # Search by region
+        results = Client.objects.filter(
+            region__icontains=query
+        )
     else:
+        # If the filter type is not recognized, return no results
         results = Client.objects.none()
 
     # Render the template with the search results and filter type
@@ -71,9 +60,10 @@ def search_clients(request):
         'query': query,
         'results': results,
         'filter_by': filter_by,
-        'start_date': start_date_str,
-        'end_date': end_date_str,
+        'start_date': start_date,
+        'end_date': end_date,
     })
+
 
 def add_client(request):
     if request.method == 'POST':

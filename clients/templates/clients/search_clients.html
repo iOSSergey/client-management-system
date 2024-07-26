@@ -48,7 +48,9 @@
         <input type="date" id="start_date" name="start_date" value="{{ start_date|default:'' }}">
         <label for="end_date">To:</label>
         <input type="date" id="end_date" name="end_date" value="{{ end_date|default:'' }}">
-    {% elif filter_by == 'name' or filter_by == 'region' %}
+    {% elif filter_by == 'region' %}
+        <input type="text" name="q" placeholder="Search by region..." value="{{ query|default:'' }}">
+    {% else %}
         <input type="text" name="q" placeholder="Search clients..." value="{{ query|default:'' }}">
     {% endif %}
 
