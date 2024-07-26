@@ -1,13 +1,11 @@
 from django.db import models
 from datetime import date
 
-
 class Client(models.Model):
     id = models.AutoField(primary_key=True)
     last_name = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255)
     middle_name = models.CharField(max_length=255, null=True, blank=True)
-    mailing_name = models.CharField(max_length=255, null=True, blank=True)
     postal_code = models.CharField(max_length=20, null=True, blank=True)
     country = models.CharField(max_length=255)
     region = models.CharField(max_length=255, null=True, blank=True)

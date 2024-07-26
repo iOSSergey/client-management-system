@@ -9,7 +9,6 @@ class ClientForm(forms.ModelForm):
             'last_name': forms.TextInput(attrs={'placeholder': 'Enter last name'}),
             'first_name': forms.TextInput(attrs={'placeholder': 'Enter first name'}),
             'middle_name': forms.TextInput(attrs={'placeholder': 'Enter middle name'}),
-            'mailing_name': forms.TextInput(attrs={'placeholder': 'Enter mailing name'}),
             'postal_code': forms.TextInput(attrs={'placeholder': 'Enter postal code'}),
             'country': forms.TextInput(attrs={'placeholder': 'Enter country'}),
             'region': forms.TextInput(attrs={'placeholder': 'Enter region'}),
