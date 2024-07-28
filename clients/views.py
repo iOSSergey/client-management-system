@@ -4,15 +4,19 @@ from .models import Client
 from .forms import ClientForm
 from datetime import datetime
 
+
 def latest_clients(request):
     # Get the latest 5 clients ordered by ID
     clients = Client.objects.order_by('-id')[:5]
     return render(request, 'clients/latest_clients.html', {'clients': clients})
 
+
 def top_clients(request):
     # Get the top 20 clients based on the number of trips
-    clients = Client.objects.annotate(trip_count=Count('trips')).order_by('-trip_count')[:20]
+    clients = Client.objects.annotate(
+        trip_count=Count('trips')).order_by('-trip_count')[:20]
     return render(request, 'clients/top_clients.html', {'clients': clients})
+
 
 def client_detail(request, client_id):
     # Get the details of a specific client and their trips
@@ -42,12 +46,17 @@ def search_clients(request):
         try:
             start_date = datetime.strptime(start_date_str, '%Y-%m-%d').date()
             end_date = datetime.strptime(end_date_str, '%Y-%m-%d').date()
-            results = Client.objects.filter(birth_date__range=(start_date, end_date))
+            results = Client.objects.filter(
+                birth_date__range=(start_date, end_date))
         except ValueError:
             # Handle invalid date input
             results = Client.objects.none()
     elif filter_by == 'region' and query:
-        results = Client.objects.filter(region__icontains=query);
+        results = Client.objects.filter(region__icontains=query)
+
+   # Get unique regions for the dropdown list
+    regions = Client.objects.values_list('region', flat=True).distinct().exclude(
+        region__isnull=True).exclude(region='')
 
     # Render the template with the search results and filter type
     return render(request, 'clients/search_clients.html', {
@@ -56,6 +65,7 @@ def search_clients(request):
         'filter_by': filter_by,
         'start_date': start_date_str,
         'end_date': end_date_str,
+        'regions': regions,
     })
 
 
@@ -64,7 +74,8 @@ def add_client(request):
         form = ClientForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('client_list')  # Redirect to client list or another page
+            # Redirect to client list or another page
+            return redirect('client_list')
     else:
         form = ClientForm()
     return render(request, 'clients/add_client.html', {'form': form})
