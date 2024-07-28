@@ -42,6 +42,7 @@
 </h1>
 
 <form method="get" action="{% url 'search_clients' %}">
+    <input type="hidden" name="next" value="{{ request.META.HTTP_REFERER }}">
     <input type="hidden" name="filter" value="{{ filter_by }}">
 
     {% if filter_by == 'birthday' %}

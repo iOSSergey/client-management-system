@@ -1,11 +1,19 @@
 {% extends 'clients/base.html' %}
 
+{% block sidebar %}
+<h2>Edit Client:</h2>
+<p>Use this form to update the client's information.</p>
+<ul>
+    <li><a href="{% url 'client_detail' client.id %}">Go Back</a></li>
+</ul>
+{% endblock %}
+
 {% block content %}
-<h2>Edit Client</h2>
+<h1>Edit Client: {{ client.first_name}} {{ client.middle_name}} {{ client.last_name}}</h1>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Save changes</button>
+  <a href="{% url 'client_detail' client.id %}" class="cancel-button">Back</a>
 </form>
-<a href="{% url 'client_detail' client.id %}">Cancel</a>
 {% endblock %}

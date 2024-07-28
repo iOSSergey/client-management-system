@@ -3,41 +3,43 @@
 {% block title %}Client Details{% endblock %}
 
 {% block sidebar %}
-    <h2>Client Actions</h2>
-    <p>Manage the information and activities related to this client.</p>
-    <ul>
-        <li><a href="{% url 'edit_client' client.id %}">Edit Client Info</a></li> <!-- Modify client details and information -->
-        <li><a href="{% url 'trip_create' client.id %}">Add New Trip</a></li> <!-- Add a new trip for this client -->
-    </ul>
+<h2>Client Actions</h2>
+<p>Manage the information and activities related to this client.</p>
+<ul>
+    <li><a href="{% url 'edit_client' client.id %}">Edit Client Info</a></li>
+    <!-- Modify client details and information -->
+    <li><a href="{% url 'trip_create' client.id %}">Add New Trip</a></li> <!-- Add a new trip for this client -->
+</ul>
 
-    <h2>Navigation</h2>
-    <p>Navigate through the client management system.</p>
-    <ul>
-        <li><a href="{% url 'search_clients' %}">Search Clients</a></li> <!-- Search for clients in the system -->
-        <li><a href="{% url 'add_client' %}">Add New Client</a></li> <!-- Add a new client to the system -->
-    </ul>
+<h2>Navigation</h2>
+<p>Navigate through the client management system.</p>
+<ul>
+    <li><a href="{% url 'search_clients' %}">Search Clients</a></li> <!-- Search for clients in the system -->
+    <li><a href="{% url 'add_client' %}">Add New Client</a></li> <!-- Add a new client to the system -->
+</ul>
 
-    <h2>Quick Actions</h2>
-    <p>Perform common actions quickly related to this client.</p>
-    <ul>
-        <li><a href="#">Export Data</a></li> <!-- Export the client's data to a file -->
-        <li><a href="mailto:{{ client.email }}">Send Email</a></li> <!-- Send an email to the client -->
-        {% if client.mobile_phone %}
-            <li><a href="sms:+{{ client.mobile_phone }}">Send SMS</a></li> <!-- Send an SMS to the client if a mobile phone is available -->
-        {% endif %}
-    </ul>
+<h2>Quick Actions</h2>
+<p>Perform common actions quickly related to this client.</p>
+<ul>
+    <li><a href="#">Export Data</a></li> <!-- Export the client's data to a file -->
+    <li><a href="mailto:{{ client.email }}">Send Email</a></li> <!-- Send an email to the client -->
+    {% if client.mobile_phone %}
+    <li><a href="sms:+{{ client.mobile_phone }}">Send SMS</a></li>
+    <!-- Send an SMS to the client if a mobile phone is available -->
+    {% endif %}
+</ul>
 
-    <h2>Client Summary</h2>
-    <p>Overview of key information about this client.</p>
-    <div><strong>Name:</strong> {{ client.first_name }} {{ client.last_name }}</div> <!-- Client's full name -->
-    <div><strong>City:</strong> {{ client.city }}</div> <!-- City where the client resides -->
-    <div><strong>Age:</strong> {{ client.age_with_suffix }}</div> <!-- Client's age with suffix (e.g., "years") -->
-    <div><strong>Number of Trips:</strong> {{ client.trip_count }}</div> <!-- Total number of trips this client has made -->
+<h2>Client Summary</h2>
+<p>Overview of key information about this client.</p>
+<div><strong>Name:</strong> {{ client.first_name }} {{ client.last_name }}</div> <!-- Client's full name -->
+<div><strong>City:</strong> {{ client.city }}</div> <!-- City where the client resides -->
+<div><strong>Age:</strong> {{ client.age_with_suffix }}</div> <!-- Client's age with suffix (e.g., "years") -->
+<div><strong>Number of Trips:</strong> {{ client.trip_count }}</div> <!-- Total number of trips this client has made -->
 {% endblock %}
 
 {% block content %}
 <div class="client-details">
-    <a href="{% url 'search_clients' %}" class="back-button">&lt; Back</a> <!-- Back button -->
+
 
     <h1>{{ client.last_name }}, {{ client.first_name }} {{ client.middle_name }}</h1>
     <div class="client-info">
@@ -64,38 +66,40 @@
 
     <h2>Trips</h2>
     {% if trips %}
-        <table class="trip-table">
-            <thead>
-                <tr>
-                    <th>Destination</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Accommodation</th>
-                    <th>Price</th>
-                    <th>Notes</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for trip in trips %}
-                    <tr>
-                        <td>{{ trip.destination }}</td>
-                        <td>{{ trip.start_date }}</td>
-                        <td>{{ trip.end_date }}</td>
-                        <td>{{ trip.accommodation }}</td>
-                        <td>{{ trip.price }}</td>
-                        <td>{{ trip.notes }}</td>
-                        <td>
-                            <a href="{% url 'trip_update' trip.pk %}" class="action-link edit">Edit</a>
-                            <a href="{% url 'trip_delete' trip.pk %}" class="action-link delete">Delete</a>
-                        </td>                                          
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <table class="trip-table">
+        <thead>
+            <tr>
+                <th>Destination</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Accommodation</th>
+                <th>Price</th>
+                <th>Notes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trip in trips %}
+            <tr>
+                <td>{{ trip.destination }}</td>
+                <td>{{ trip.start_date }}</td>
+                <td>{{ trip.end_date }}</td>
+                <td>{{ trip.accommodation }}</td>
+                <td>{{ trip.price }}</td>
+                <td>{{ trip.notes }}</td>
+                <td>
+                    <a href="{% url 'trip_update' trip.pk %}" class="action-link edit">Edit</a>
+                    <a href="{% url 'trip_delete' trip.pk %}" class="action-link delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     {% else %}
-        <p>No trips found for this client.</p>
+    <p>No trips found for this client.</p>
     {% endif %}
     <a class="add-trip-button" href="{% url 'trip_create' client.id %}">Add New Trip</a>
+    <a href="{% url 'edit_client' client.id %}" class="back-button" style="display: inline-block;">Edit Client</a>
+    <a href="{{ request.META.HTTP_REFERER }}" class="back-button" style="display: inline-block;">Back</a>
 </div>
 {% endblock %}

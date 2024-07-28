@@ -1,4 +1,4 @@
-/* Основные стили страницы */
+/* Main styles for the page */
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -8,14 +8,14 @@ body {
   padding: 0;
 }
 
-/* Стили для контейнера основного контента */
+/* Styles for the main content container */
 .container {
   display: flex;
 }
 
-/* Стили для боковой колонки */
+/* Styles for the sidebar */
 .sidebar {
-  width: 250px; /* Фиксированная ширина боковой колонки */
+  width: 250px; /* Fixed width for the sidebar */
   padding: 15px;
   background: #f9f9f9;
   border-right: 1px solid #ddd;
@@ -49,13 +49,13 @@ body {
   text-decoration: underline;
 }
 
-/* Стили для основного контента */
+/* Styles for the main content */
 .main-content {
-  flex: 1; /* Основной контент занимает оставшееся пространство */
+  flex: 1; /* Main content takes up the remaining space */
   padding: 15px;
 }
 
-/* Стили для форм */
+/* Styles for forms */
 form {
   margin: 0;
   padding: 0;
@@ -82,32 +82,32 @@ form input[type="radio"] {
 
 form button[type="submit"],
 .add-trip-button {
-  background-color: #5cb85c; /* Зеленый цвет фона */
-  color: white; /* Белый цвет текста */
-  border: none; /* Удаление стандартной рамки */
-  padding: 10px 20px; /* Внутренние отступы */
-  text-align: center; /* Выравнивание текста по центру */
-  text-decoration: none; /* Удаление подчеркивания текста */
-  display: inline-block; /* Выравнивание кнопки */
-  font-size: 16px; /* Размер шрифта */
-  margin-top: 10px; /* Верхний отступ */
-  border-radius: 5px; /* Скругленные углы */
-  cursor: pointer; /* Курсор в виде руки при наведении */
-  transition: background-color 0.3s, box-shadow 0.3s; /* Плавные переходы для фона и тени */
+  background-color: #5cb85c; /* Green background color */
+  color: white; /* White text color */
+  border: none; /* Remove default border */
+  padding: 10px 20px; /* Internal padding */
+  text-align: center; /* Center text alignment */
+  text-decoration: none; /* Remove text underline */
+  display: inline-block; /* Align button */
+  font-size: 16px; /* Font size */
+  margin-top: 10px; /* Top margin */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions for background and shadow */
 }
 
 form button[type="submit"]:hover,
 .add-trip-button:hover {
-  background-color: #4cae4c; /* Более темный зеленый цвет при наведении */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+  background-color: #4cae4c; /* Darker green on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow on hover */
 }
 
-/* Специальные стили для select с id "region" */
+/* Special styles for the select element with id "region" */
 #region {
-  width: 20vw; /* Ширина элемента соответствует содержимому */
+  width: 20vw; /* Width of the element is set to fit its content */
 }
 
-/* Стили для меню */
+/* Styles for the navigation menu */
 nav {
   background: #333;
   color: #fff;
@@ -136,7 +136,7 @@ nav ul li a:hover {
   background: #575757;
 }
 
-/* Стили для таблиц */
+/* Styles for tables */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -154,7 +154,7 @@ table th {
   background-color: #f4f4f4;
 }
 
-/* Стили для сообщений об ошибках и успехе */
+/* Styles for error and success messages */
 .error-message,
 .success-message {
   padding: 15px;
@@ -174,7 +174,7 @@ table th {
   border: 1px solid #d6e9c6;
 }
 
-/* Дополнительные стили для страницы Client Details */
+/* Additional styles for the Client Details page */
 .client-details, .main-content {
   background: white;
   padding: 20px;
@@ -210,54 +210,53 @@ table th {
   background-color: #f9f9f9;
 }
 
-/* Стили для ссылок Edit и Delete */
+/* Styles for Edit and Delete links */
 .action-link {
   display: inline-block;
   margin: 5px;
   padding: 5px;
   text-decoration: none;
-  font-weight: normal; /* Уменьшенная жирность текста */
+  font-weight: normal; /* Lighter text weight */
   font-size: 14px;
-  border-radius: 3px; /* Меньший радиус скругления для простых ссылок */
-  color: #333; /* Основной цвет текста */
+  border-radius: 3px; /* Smaller border-radius for simple links */
+  color: #333; /* Primary text color */
 }
 
 .action-link:hover {
-  text-decoration: underline; /* Подчеркивание при наведении */
+  text-decoration: underline; /* Underline on hover */
 }
 
-/* Стили для ссылки Edit */
+/* Styles for the Edit link */
 .action-link.edit {
-  color: #6c757d; /* Уменьшенная яркость серого для Edit */
+  color: #6c757d; /* Softer gray color for Edit */
 }
 
 .action-link.edit:hover {
-  color: #5a6268; /* Более темный оттенок серого для эффекта наведения */
+  color: #5a6268; /* Darker gray on hover */
 }
 
-/* Стили для ссылки Delete */
+/* Styles for the Delete link */
 .action-link.delete {
-  color: #dc3545; /* Темно-красный цвет текста для Delete */
+  color: #dc3545; /* Dark red color for Delete */
 }
 
 .action-link.delete:hover {
-  color: #c82333; /* Более темный оттенок темно-красного для эффекта наведения */
+  color: #c82333; /* Darker red on hover */
 }
 
-/* Стили для кнопки "Back" */
-.back-button {
-  display: inline-block;
+/* Styles for the "Back" button */
+.back-button, .cancel-button {
   border: none;
   margin-top: 10px;
   padding: 10px 20px;
-  background-color: #6c757d; /* Средний серый цвет фона */
-  color: #fff; /* Белый цвет текста */
+  background-color: #6c757d; /* Medium gray background */
+  color: #fff; /* White text color */
   text-decoration: none;
   border-radius: 5px;
-  transition: box-shadow 0.3s; /* Плавный переход */
+  transition: box-shadow 0.3s; /* Smooth transition */
 }
 
-.back-button:hover {
+.back-button:hover, .cancel-button:hover {
   background-color: #5a6268;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Тень */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
 }
