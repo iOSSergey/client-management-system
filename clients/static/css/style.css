@@ -76,22 +76,26 @@ form input[type="radio"] {
   margin-right: 5px;
 }
 
-form button[type="submit"] {
-  background-color: #5cb85c;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin-top: 10px;
-  border-radius: 5px;
-  cursor: pointer;
+form button[type="submit"],
+.add-trip-button {
+  background-color: #5cb85c; /* Зеленый цвет фона */
+  color: white; /* Белый цвет текста */
+  border: none; /* Удаление стандартной рамки */
+  padding: 10px 20px; /* Внутренние отступы */
+  text-align: center; /* Выравнивание текста по центру */
+  text-decoration: none; /* Удаление подчеркивания текста */
+  display: inline-block; /* Выравнивание кнопки */
+  font-size: 16px; /* Размер шрифта */
+  margin-top: 10px; /* Верхний отступ */
+  border-radius: 5px; /* Скругленные углы */
+  cursor: pointer; /* Курсор в виде руки при наведении */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Плавные переходы для фона и тени */
 }
 
-form button[type="submit"]:hover {
-  background-color: #4cae4c;
+form button[type="submit"]:hover,
+.add-trip-button:hover {
+  background-color: #4cae4c; /* Более темный зеленый цвет при наведении */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень при наведении */
 }
 
 /* Стили для меню */
@@ -197,50 +201,6 @@ table th {
   background-color: #f9f9f9;
 }
 
-/* Стили для кнопки "Add New Trip" */
-.add-trip-button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 15px;
-  background-color: #6c757d; /* Средний серый цвет фона */
-  color: #fff; /* Белый цвет текста */
-  text-decoration: none;
-  border-radius: 5px;
-}
-
-.add-trip-button:hover {
-  background-color: #5a6268; /* Более темный оттенок серого для эффекта наведения */
-}
-
-/* Стили для кнопки "Add New Trip" */
-.add-trip-button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 15px;
-  background-color: #6c757d; /* Средний серый цвет фона */
-  color: #fff; /* Белый цвет текста */
-  text-decoration: none;
-  border-radius: 5px;
-}
-
-.add-trip-button:hover {
-  background-color: #5a6268; /* Более темный оттенок серого для эффекта наведения */
-}
-
-/* Стили для кнопки "Add New Trip" */
-.add-trip-button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 15px;
-  background-color: #6c757d; /* Средний серый цвет фона */
-  color: #fff; /* Белый цвет текста */
-  text-decoration: none;
-  border-radius: 5px;
-}
-
-.add-trip-button:hover {
-  background-color: #5a6268; /* Более темный оттенок серого для эффекта наведения */
-}
 
 /* Стили для ссылок Edit и Delete */
 .action-link {
@@ -278,26 +238,17 @@ table th {
 
 /* Стили для кнопки "Back" */
 .back-button {
-  background-color: #5cb85c; /* Зеленый цвет фона */
-  color: white; /* Белый цвет текста */
-  border: none; /* Удаление стандартной рамки */
-  padding: 10px 20px; /* Внутренние отступы */
-  text-align: center; /* Выравнивание текста по центру */
-  text-decoration: none; /* Удаление подчеркивания текста */
-  display: inline-block; /* Выравнивание кнопки */
-  font-size: 16px; /* Размер шрифта */
-  margin-top: 10px; /* Верхний отступ */
-  border-radius: 5px; /* Скругленные углы */
-  cursor: pointer; /* Курсор в виде руки при наведении */
-  transition: background-color 0.3s, box-shadow 0.3s; /* Плавные переходы для фона и тени */
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #6c757d; /* Средний серый цвет фона */
+  color: #fff; /* Белый цвет текста */
+  text-decoration: none;
+  border-radius: 5px;
+  transition: box-shadow 0.3s; /* Плавный переход */
 }
 
 .back-button:hover {
-  background-color: #4cae4c; /* Более темный зеленый цвет при наведении */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень при наведении */
-}
-
-.back-button:active {
-  background-color: #398c39; /* Еще более темный зеленый цвет при нажатии */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Меньшая тень при нажатии */
+  background-color: #5a6268;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Тень */
 }
