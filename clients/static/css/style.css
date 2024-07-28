@@ -201,7 +201,6 @@ table th {
   background-color: #f9f9f9;
 }
 
-
 /* Стили для ссылок Edit и Delete */
 .action-link {
   display: inline-block;
@@ -239,8 +238,9 @@ table th {
 /* Стили для кнопки "Back" */
 .back-button {
   display: inline-block;
+  border: none;
   margin-top: 10px;
-  padding: 10px 15px;
+  padding: 10px 20px;
   background-color: #6c757d; /* Средний серый цвет фона */
   color: #fff; /* Белый цвет текста */
   text-decoration: none;
