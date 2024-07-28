@@ -19,6 +19,9 @@ body {
   padding: 15px;
   background: #f9f9f9;
   border-right: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .sidebar h2 {
@@ -172,7 +175,7 @@ table th {
 }
 
 /* Дополнительные стили для страницы Client Details */
-.client-details {
+.client-details, .main-content {
   background: white;
   padding: 20px;
   border-radius: 10px;
