@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Count
+from django.db.models import Count, Q
 from .models import Client
 from .forms import ClientForm
 from datetime import datetime
@@ -30,42 +30,24 @@ def search_clients(request):
     start_date_str = request.GET.get('start_date', '')
     end_date_str = request.GET.get('end_date', '')
 
-    # Initialize the queryset
-    results = Client.objects.all()
+    results = Client.objects.none()
 
-    if filter_by == 'name':
-        if query:
-            # Filter by last_name, first_name, and middle_name using multiple filter calls with OR conditions
-            results = results.filter(
-                last_name__icontains=query
-            ) | results.filter(
-                first_name__icontains=query
-            ) | results.filter(
-                middle_name__icontains=query
-            )
-        else:
-            results = Client.objects.none()  # Return no results if no query is provided
-    elif filter_by == 'birthday':
-        if start_date_str and end_date_str:
-            try:
-                # Convert start_date and end_date to datetime.date objects
-                start_date = datetime.strptime(start_date_str, '%Y-%m-%d').date()
-                end_date = datetime.strptime(end_date_str, '%Y-%m-%d').date()
-                # Apply the date range filter
-                results = results.filter(birth_date__range=(start_date, end_date))
-            except ValueError as e:
-                # Log the error for debugging
-                print(f"Date conversion error: {e}")
-                results = Client.objects.none()
-        else:
+    if filter_by == 'name' and query:
+        results = Client.objects.filter(
+            Q(last_name__icontains=query) |
+            Q(first_name__icontains=query) |
+            Q(middle_name__icontains=query)
+        )
+    elif filter_by == 'birthday' and start_date_str and end_date_str:
+        try:
+            start_date = datetime.strptime(start_date_str, '%Y-%m-%d').date()
+            end_date = datetime.strptime(end_date_str, '%Y-%m-%d').date()
+            results = Client.objects.filter(birth_date__range=(start_date, end_date))
+        except ValueError:
+            # Handle invalid date input
             results = Client.objects.none()
-    elif filter_by == 'region':
-        if query:
-            results = results.filter(region__icontains=query)
-        else:
-            results = Client.objects.none()
-    else:
-        results = Client.objects.none()
+    elif filter_by == 'region' and query:
+        results = Client.objects.filter(region__icontains=query);
 
     # Render the template with the search results and filter type
     return render(request, 'clients/search_clients.html', {
