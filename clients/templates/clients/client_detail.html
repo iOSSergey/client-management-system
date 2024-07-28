@@ -6,7 +6,7 @@
     <h2>Client Actions</h2>
     <p>Manage the information and activities related to this client.</p>
     <ul>
-        <li><a href="#">Edit Client Info</a></li> <!-- Modify client details and information -->
+        <li><a href="{% url 'edit_client' client.id %}">Edit Client Info</a></li> <!-- Modify client details and information -->
         <li><a href="{% url 'trip_create' client.id %}">Add New Trip</a></li> <!-- Add a new trip for this client -->
     </ul>
 
@@ -14,7 +14,7 @@
     <p>Navigate through the client management system.</p>
     <ul>
         <li><a href="{% url 'search_clients' %}">Search Clients</a></li> <!-- Search for clients in the system -->
-        <li><a href="#">Add New Client</a></li> <!-- Add a new client to the system -->
+        <li><a href="{% url 'add_client' %}">Add New Client</a></li> <!-- Add a new client to the system -->
     </ul>
 
     <h2>Quick Actions</h2>

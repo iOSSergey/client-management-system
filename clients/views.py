@@ -79,3 +79,16 @@ def add_client(request):
     else:
         form = ClientForm()
     return render(request, 'clients/add_client.html', {'form': form})
+
+
+def edit_client(request, client_id):
+    client = get_object_or_404(Client, id=client_id)
+    if request.method == 'POST':
+        form = ClientForm(request.POST, instance=client)
+        if form.is_valid():
+            form.save()
+            return redirect('client_detail', client_id=client.id)
+    else:
+        form = ClientForm(instance=client)
+    return render(request, 'clients/edit_client.html', {'form': form, 'client': client})
+
