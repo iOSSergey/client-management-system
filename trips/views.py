@@ -21,6 +21,7 @@ from django.shortcuts import redirect
 
 def trip_update(request, pk):
     trip = get_object_or_404(Trip, pk=pk)
+    client = trip.client
     if request.method == 'POST':
         form = TripForm(request.POST, instance=trip)
         if form.is_valid():
@@ -29,7 +30,7 @@ def trip_update(request, pk):
             return redirect('client_detail', client_id=trip.client.id)
     else:
         form = TripForm(instance=trip)
-    return render(request, 'trips/trip_form.html', {'form': form})
+    return render(request, 'trips/trip_form.html', {'form': form, 'client': client})
 
 
 # The `trip_list` view is deprecated. Redirects to the client's detail page.

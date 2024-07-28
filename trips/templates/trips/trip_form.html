@@ -1,10 +1,27 @@
 {% extends 'trips/base.html' %}
 
+{% block sidebar %}
+<h2>Client Trip:</h2>
+<p>Specify the trip's dates, destination, accommodation, price, and notes.</p>
+<h2>Client Summary</h2>
+<p>Overview of key information about this client.</p>
+<div><strong>Name:</strong> {{ client.first_name }} {{ client.last_name }}</div> <!-- Client's full name -->
+<div><strong>City:</strong> {{ client.city }}</div> <!-- City where the client resides -->
+<div><strong>Age:</strong> {{ client.age_with_suffix }}</div> <!-- Client's age with suffix (e.g., "years") -->
+<div><strong>Number of Trips:</strong> {{ client.trip_count }}</div> <!-- Total number of trips this client has made -->
+
+{% endblock %}
+
 {% block content %}
-  <h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Trip</h2>
+<div class="client-details">
+  <a href="{% url 'client_detail' client.id %}" class="back-button">&lt; Back</a> <!-- Back button -->
+  <h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Trip for {{ client.first_name }} {{ client.middle_name }}
+    {{ client.last_name }}
+  </h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
   </form>
+</div>
 {% endblock %}
