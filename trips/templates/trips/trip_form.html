@@ -15,9 +15,9 @@
 {% block content %}
 <div class="client-details">
   <a href="{% url 'client_detail' client.id %}" class="back-button">&lt; Back</a> <!-- Back button -->
-  <h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Trip for {{ client.first_name }} {{ client.middle_name }}
+  <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Trip for {{ client.first_name }} {{ client.middle_name }}
     {{ client.last_name }}
-  </h2>
+  </h1>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
