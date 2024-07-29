@@ -30,7 +30,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 if not SECRET_KEY:
-    raise ValueError("No SECRET_KEY set for Django application. Did you forget to set the SECRET_KEY environment variable?")
+    raise ValueError(
+        "No SECRET_KEY set for Django application. Did you forget to set the SECRET_KEY environment variable?")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -95,6 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('DATABASE_NAME'),
         'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
         'HOST': os.getenv('DATABASE_HOST', '127.0.0.1'),
         'PORT': os.getenv('DATABASE_PORT', '3306'),
     }
