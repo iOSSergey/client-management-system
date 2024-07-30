@@ -64,17 +64,17 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
-          rsync -e "ssh -i private_key.pem -o StrictHostKeyChecking=no" -avz --exclude='.git' --exclude='venv' ./ $USERNAME@$SERVER:/var/www/pavlyuk.online/
-          ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER << 'EOF'
+          rsync -e "ssh -i private_key.pem -o StrictHostKeyChecking=no" -avz --exclude='.git' --exclude='venv' ./ $USERNAME@$SERVER:/var/www/client-management-system/
+          ssh -i private_key.pem -o StrictHostKeyChecking=no -t $USERNAME@$SERVER << 'EOF'
             cd /var/www/client-management-system
             source /var/www/client-management-system/venv/bin/activate
-            export SECRET_KEY="$SECRET_KEY"
-            export DATABASE_NAME="$DATABASE_NAME"
-            export DATABASE_USER="$DATABASE_USER"
-            export DATABASE_PASSWORD="$DATABASE_PASSWORD"
-            export DATABASE_HOST="$DATABASE_HOST"
-            export DATABASE_PORT="$DATABASE_PORT"
-            export DEBUG="$DEBUG"
+            export SECRET_KEY="${{ secrets.SECRET_KEY }}"
+            export DATABASE_NAME="${{ secrets.DATABASE_NAME }}"
+            export DATABASE_USER="${{ secrets.DATABASE_USER }}"
+            export DATABASE_PASSWORD="${{ secrets.DATABASE_PASSWORD }}"
+            export DATABASE_HOST="${{ secrets.DATABASE_HOST }}"
+            export DATABASE_PORT="${{ secrets.DATABASE_PORT }}"
+            export DEBUG="${{ secrets.DEBUG }}"
             python manage.py migrate
             sudo systemctl restart apache2  # Перезапуск Apache
           EOF
