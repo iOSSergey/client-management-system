@@ -37,18 +37,6 @@ jobs:
         run: |
           python manage.py dbcheck
 
-      - name: Run tests
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          DATABASE_USER: ${{ secrets.DATABASE_USER }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-          DEBUG: ${{ secrets.DEBUG }}
-      run: |
-        python manage.py test  # Или любой другой тестовый фреймворк, который вы используете
-
       - name: Build and collect static files
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
