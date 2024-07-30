@@ -76,5 +76,6 @@ jobs:
             export DATABASE_PORT="${{ secrets.DATABASE_PORT }}"
             export DEBUG="${{ secrets.DEBUG }}"
             python manage.py migrate
-            sudo systemctl restart apache2  # Перезапуск Apache
+            sudo systemctl restart gunicorn
+            sudo systemctl restart nginx
           EOF
