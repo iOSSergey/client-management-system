@@ -25,56 +25,64 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          DATABASE_USER: ${{ secrets.DATABASE_USER }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-          DEBUG: ${{ secrets.DEBUG }}
+      - name: Print environment variables
         run: |
-          python manage.py test  # Или любой другой тестовый фреймворк, который вы используете
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}"
+          echo "DATABASE_NAME=${{ secrets.DATABASE_NAME }}"
+          echo "DATABASE_USER=${{ secrets.DATABASE_USER }}"
+          echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}"
+          echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}"
+          
+      # - name: Run tests
+      #   env:
+      #     SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      #     DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      #     DATABASE_USER: ${{ secrets.DATABASE_USER }}
+      #     DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      #     DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+      #     DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+      #     DEBUG: ${{ secrets.DEBUG }}
+        # run: |
+        #   python manage.py test  # Или любой другой тестовый фреймворк, который вы используете
 
-      - name: Build and collect static files
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          DATABASE_USER: ${{ secrets.DATABASE_USER }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-          DEBUG: ${{ secrets.DEBUG }}
-        run: |
-          python manage.py collectstatic --noinput
+      # - name: Build and collect static files
+      #   env:
+      #     SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      #     DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      #     DATABASE_USER: ${{ secrets.DATABASE_USER }}
+      #     DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      #     DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+      #     DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+      #     DEBUG: ${{ secrets.DEBUG }}
+      #   run: |
+      #     python manage.py collectstatic --noinput
 
-      - name: Deploy to server
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SERVER: ${{ secrets.SERVER }}
-          USERNAME: ${{ secrets.USERNAME }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          DATABASE_USER: ${{ secrets.DATABASE_USER }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-          DEBUG: ${{ secrets.DEBUG }}
-        run: |
-          echo "$SSH_PRIVATE_KEY" > private_key.pem
-          chmod 600 private_key.pem
-          rsync -e "ssh -i private_key.pem -o StrictHostKeyChecking=no" -avz --exclude='.git' --exclude='venv' ./ $USERNAME@$SERVER:/var/www/pavlyuk.online/
-          ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER << 'EOF'
-            cd /var/www/client-management-system
-            source /var/www/client-management-system/venv/bin/activate
-            export SECRET_KEY="$SECRET_KEY"
-            export DATABASE_NAME="$DATABASE_NAME"
-            export DATABASE_USER="$DATABASE_USER"
-            export DATABASE_PASSWORD="$DATABASE_PASSWORD"
-            export DATABASE_HOST="$DATABASE_HOST"
-            export DATABASE_PORT="$DATABASE_PORT"
-            export DEBUG="$DEBUG"
-            python manage.py migrate
-            sudo systemctl restart apache2  # Перезапуск Apache
-          EOF
+      # - name: Deploy to server
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     SERVER: ${{ secrets.SERVER }}
+      #     USERNAME: ${{ secrets.USERNAME }}
+      #     SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      #     DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      #     DATABASE_USER: ${{ secrets.DATABASE_USER }}
+      #     DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      #     DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+      #     DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+      #     DEBUG: ${{ secrets.DEBUG }}
+      #   run: |
+      #     echo "$SSH_PRIVATE_KEY" > private_key.pem
+      #     chmod 600 private_key.pem
+      #     rsync -e "ssh -i private_key.pem -o StrictHostKeyChecking=no" -avz --exclude='.git' --exclude='venv' ./ $USERNAME@$SERVER:/var/www/pavlyuk.online/
+      #     ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER << 'EOF'
+      #       cd /var/www/client-management-system
+      #       source /var/www/client-management-system/venv/bin/activate
+      #       export SECRET_KEY="$SECRET_KEY"
+      #       export DATABASE_NAME="$DATABASE_NAME"
+      #       export DATABASE_USER="$DATABASE_USER"
+      #       export DATABASE_PASSWORD="$DATABASE_PASSWORD"
+      #       export DATABASE_HOST="$DATABASE_HOST"
+      #       export DATABASE_PORT="$DATABASE_PORT"
+      #       export DEBUG="$DEBUG"
+      #       python manage.py migrate
+      #       sudo systemctl restart apache2  # Перезапуск Apache
+      #     EOF
