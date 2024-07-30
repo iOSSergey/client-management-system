@@ -18,21 +18,23 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'  # Укажите нужную версию Python
+          python-version: "3.12.4" # Укажите нужную версию Python
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Print environment variables
+      - name: Set environment variables
+        env:
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
-          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}"
-          echo "DATABASE_NAME=${{ secrets.DATABASE_NAME }}"
-          echo "DATABASE_USER=${{ secrets.DATABASE_USER }}"
-          echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}"
-          echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}"
-          
+          python manage.py dbcheck
+
       # - name: Run tests
       #   env:
       #     SECRET_KEY: ${{ secrets.SECRET_KEY }}
@@ -42,8 +44,8 @@ jobs:
       #     DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
       #     DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
       #     DEBUG: ${{ secrets.DEBUG }}
-        # run: |
-        #   python manage.py test  # Или любой другой тестовый фреймворк, который вы используете
+      # run: |
+      #   python manage.py test  # Или любой другой тестовый фреймворк, который вы используете
 
       # - name: Build and collect static files
       #   env:
