@@ -64,7 +64,7 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
-          rsync -e "ssh -i private_key.pem -o StrictHostKeyChecking=no" -avz --exclude='.git' --exclude='venv' ./ $USERNAME@$SERVER:/var/www/client-management-system/
+          rsync -e "ssh -i private_key.pem -o StrictHostKeyChecking=no" -avz --exclude='.git' --exclude='venv' ./ ${{ secrets.USERNAME }}@${{ secrets.SERVER }}:/var/www/client-management-system/
           ssh -i private_key.pem -o StrictHostKeyChecking=no -t $USERNAME@$SERVER << 'EOF'
             cd /var/www/client-management-system
             source /var/www/client-management-system/venv/bin/activate
