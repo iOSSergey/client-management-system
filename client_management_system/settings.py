@@ -37,7 +37,7 @@ if not SECRET_KEY:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
 
-ALLOWED_HOSTS = ['pavlyuk.online', 'www.pavlyuk.online']
+ALLOWED_HOSTS = ['127.0.0.1', 'pavlyuk.online', 'www.pavlyuk.online']
 
 
 # Application definition
