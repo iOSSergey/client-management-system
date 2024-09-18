@@ -1,0 +1,11 @@
+services:
+  web:
+    image: client_management_system
+    container_name: cms_container
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    command: python manage.py runserver 0.0.0.0:8000
