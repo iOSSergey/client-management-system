@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from datetime import date
 
 class Client(models.Model):
@@ -21,6 +22,8 @@ class Client(models.Model):
     email = models.EmailField(null=True, blank=True)
     send_email = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.last_name} {self.first_name} {self.middle_name or ''}".strip()
@@ -47,21 +50,3 @@ class Client(models.Model):
 
     # class Meta:
     #     db_table = 'ClientBase'
-
-
-# class Country(models.Model):
-#     n = models.AutoField(db_column='N', primary_key=True)
-#     value = models.CharField(db_column='Value', unique=True, max_length=50)
-
-#     class Meta:
-#         managed = False
-#         db_table = 'Country'
-
-
-# class Type(models.Model):
-#     n = models.SmallAutoField(db_column='N', primary_key=True)
-#     value = models.CharField(db_column='Value', max_length=50)
-
-#     class Meta:
-#         managed = False
-#         db_table = 'Type'
