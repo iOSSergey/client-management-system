@@ -4,7 +4,8 @@ from .models import Client
 class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
-        fields = '__all__'
+        # Exclude the ip_address field from the form
+        exclude = ['ip_address', 'created_at']
         widgets = {
             'last_name': forms.TextInput(attrs={'placeholder': 'Enter last name'}),
             'first_name': forms.TextInput(attrs={'placeholder': 'Enter first name'}),
