@@ -4,10 +4,12 @@ from .models import Client
 from .forms import ClientForm
 from datetime import datetime
 
+
 def latest_clients(request):
     # Get the latest 5 clients ordered by ID
     clients = Client.objects.order_by('-id')[:5]
     return render(request, 'clients/latest_clients.html', {'clients': clients})
+
 
 def top_clients(request):
     # Get the top 20 clients based on the number of trips
@@ -15,11 +17,13 @@ def top_clients(request):
         trip_count=Count('trips')).order_by('-trip_count')[:20]
     return render(request, 'clients/top_clients.html', {'clients': clients})
 
+
 def client_detail(request, client_id):
     # Get the details of a specific client and their trips
     client = get_object_or_404(Client, id=client_id)
     trips = client.trips.all()  # Get all trips of the client
     return render(request, 'clients/client_detail.html', {'client': client, 'trips': trips})
+
 
 def search_clients(request):
     # Get the filter type from the GET parameters, default to 'name' if not provided
@@ -64,17 +68,31 @@ def search_clients(request):
         'regions': regions,
     })
 
+
 def add_client(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)
         if form.is_valid():
-            client = form.save(commit=False)  # Save the form data without committing to the database
-            client.ip_address = request.META.get('REMOTE_ADDR')  # Get the IP address from the request
+            # Save the form data without committing to the database
+            client = form.save(commit=False)
+
+            # Get the client's IP address
+            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+            if x_forwarded_for:
+                # If there are multiple IPs, take the first one
+                client.ip_address = x_forwarded_for.split(',')[0].strip()
+            else:
+                # If the header is not present, use REMOTE_ADDR
+                client.ip_address = request.META.get('REMOTE_ADDR')
+
             client.save()  # Save the client to the database
-            return redirect('client_list')  # Redirect to client list or another page
+            # Redirect to the client list or another page
+            return redirect('latest_clients')
     else:
         form = ClientForm()
+
     return render(request, 'clients/add_client.html', {'form': form})
+
 
 def edit_client(request, client_id):
     client = get_object_or_404(Client, id=client_id)
