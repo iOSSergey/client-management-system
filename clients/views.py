@@ -70,28 +70,29 @@ def search_clients(request):
 
 
 def add_client(request):
+    # Get the client's IP address regardless of the request method
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        # If there are multiple IPs, take the first one
+        ip_address = x_forwarded_for.split(',')[0].strip()
+    else:
+        # If the header is not present, use REMOTE_ADDR
+        ip_address = request.META.get('REMOTE_ADDR')
+
     if request.method == 'POST':
         form = ClientForm(request.POST)
         if form.is_valid():
             # Save the form data without committing to the database
             client = form.save(commit=False)
-
-            # Get the client's IP address
-            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-            if x_forwarded_for:
-                # If there are multiple IPs, take the first one
-                client.ip_address = x_forwarded_for.split(',')[0].strip()
-            else:
-                # If the header is not present, use REMOTE_ADDR
-                client.ip_address = request.META.get('REMOTE_ADDR')
-
+            client.ip_address = ip_address  # Assign the IP address to the client instance
             client.save()  # Save the client to the database
             # Redirect to the client list or another page
             return redirect('latest_clients')
     else:
-        form = ClientForm()
+        form = ClientForm()  # Create a new form instance if not a POST request
 
-    return render(request, 'clients/add_client.html', {'form': form})
+    # Render the template with the form and IP address
+    return render(request, 'clients/add_client.html', {'form': form, 'ip_address': ip_address})
 
 
 def edit_client(request, client_id):
