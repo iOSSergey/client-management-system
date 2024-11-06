@@ -1,0 +1,81 @@
+{% extends 'clients/base.html' %}
+
+{% block title %}API Documentation{% endblock %}
+
+{% block sidebar %}
+<h2>API Documentation:</h2>
+<p>This documentation provides information on listing clients and trips available in the system.</p>
+<ul>
+  <li><a href="{% url "search_clients" %}">Search Clients</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+<h1>API Documentation</h1>
+
+<h2>Endpoints</h2>
+<ul>
+  <li><strong>GET /api/v1/clients/</strong> - Retrieves a list of all clients.</li>
+  <li><strong>GET /api/v1/trips/</strong> - Retrieves a list of all trips.</li>
+  <li><strong>GET /api/v1/all_data/</strong> - Retrieves both clients and trips.</li>
+</ul>
+
+<h2>Usage</h2>
+<p>To fetch data from each endpoint, you can use the following commands:</p>
+<pre>
+# Fetch all clients
+curl -X GET "https://pavlyuk.online/client-management-system/api/v1/clients/"
+
+# Fetch all trips
+curl -X GET "https://pavlyuk.online/client-management-system/api/v1/trips/"
+
+# Fetch both clients and trips
+curl -X GET "https://pavlyuk.online/client-management-system/api/v1/all_data/"
+</pre>
+
+<h2>Response Format</h2>
+<p>The API responses are in JSON format. Here’s an example response from the <code>/clients</code> endpoint:</p>
+<pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "clients": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "email": "john.doe@example.com"
+        },
+        {
+            "id": 2,
+            "name": "Jane Smith",
+            "email": "jane.smith@example.com"
+        }
+    ]
+}
+</pre>
+
+<h2>Error Responses</h2>
+<p>If an error occurs, the API will return an appropriate HTTP status code along with an error message:</p>
+<pre>
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+
+{
+    "error": "Resource not found."
+}
+</pre>
+
+<h2>Authorization</h2>
+<p>Some endpoints may require authorization. Use the following format in your request headers:</p>
+<pre>
+Authorization: Bearer {your_token_here}
+</pre>
+<p>Replace <code>{your_token_here}</code> with your actual authorization token.</p>
+
+<div class="note">
+  <strong>Note:</strong> Make sure to keep your token secure and avoid sharing it publicly.
+</div>
+
+{% endblock %}

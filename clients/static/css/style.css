@@ -154,6 +154,13 @@ table th {
   background-color: #f4f4f4;
 }
 
+.note {
+  background-color: #e7f3fe;
+  border-left: 4px solid #31708f;
+  padding: 10px;
+  margin: 10px 0;
+}
+
 /* Styles for error and success messages */
 .error-message,
 .success-message {
@@ -175,7 +182,8 @@ table th {
 }
 
 /* Additional styles for the Client Details page */
-.client-details, .main-content {
+.client-details,
+.main-content {
   background: white;
   padding: 20px;
   border-radius: 10px;
@@ -245,7 +253,8 @@ table th {
 }
 
 /* Styles for the "Back" button */
-.back-button, .cancel-button {
+.back-button,
+.cancel-button {
   border: none;
   margin-top: 10px;
   padding: 10px 20px;
@@ -256,7 +265,8 @@ table th {
   transition: box-shadow 0.3s; /* Smooth transition */
 }
 
-.back-button:hover, .cancel-button:hover {
+.back-button:hover,
+.cancel-button:hover {
   background-color: #5a6268;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
 }
