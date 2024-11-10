@@ -16,3 +16,9 @@ class ClientViewsTest(TestCase):
         self.assertTrue('clients' in response.context)
         # Check that no more than 5 clients are returned
         self.assertLessEqual(len(response.context['clients']), 5)
+
+    def test_top_clients_view(self):
+        response = self.client.get(reverse('top_clients'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'clients/top_clients.html')
+        self.assertTrue('clients' in response.context)
