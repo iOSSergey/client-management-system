@@ -12,9 +12,6 @@ COPY . .
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Copy the .env file if it's used in the project
-COPY .env .env
-
 # Expose the port that the application will run on (adjust if necessary)
 EXPOSE 8000
 
