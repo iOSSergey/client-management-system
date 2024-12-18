@@ -9,3 +9,14 @@ services:
     volumes:
       - .:/app
     command: python manage.py runserver 0.0.0.0:8000
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_container
+    ports:
+      - "8444:8444"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs
+    depends_on:
+      - web

@@ -1,2 +1,8 @@
 # .dockerignore
 .env
+
+# Ignore certificates directory
+certs/
+
+# Ignore scripts directory
+scripts/

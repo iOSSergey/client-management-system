@@ -14,3 +14,8 @@ venv/
 # Файлы конфигурации системы
 .DS_Store
 
+# Ignore certificates directory
+certs/
+
+# Ignore scripts directory
+scripts/
