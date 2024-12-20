@@ -8,7 +8,8 @@ services:
       - .env
     volumes:
       - .:/app
-    command: python manage.py runserver 0.0.0.0:8000
+    working_dir: /app
+    command: gunicorn client_management_system.wsgi:application --bind 0.0.0.0:8000 --workers 3
     restart: always
 
   nginx:
