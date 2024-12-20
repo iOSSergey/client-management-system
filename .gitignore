@@ -19,3 +19,6 @@ certs/
 
 # Ignore scripts directory
 scripts/
+
+# Ignore static files collected by collectstatic
+/staticfiles/
