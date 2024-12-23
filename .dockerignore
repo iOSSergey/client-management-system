@@ -1,4 +1,4 @@
-# .dockerignore
+# Ignore environment variable files
 .env
 
 # Ignore certificates directory
@@ -6,3 +6,6 @@ certs/
 
 # Ignore scripts directory
 scripts/
+
+# Ignore git repository
+.git
