@@ -1,4 +1,14 @@
-FROM python:3.9-slim
+# Description: Dockerfile for Django application
+
+# Stage 1: Build
+
+FROM python:3.9-alpine AS builder
+
+RUN apk add --no-cache gcc musl-dev libffi-dev openssl-dev
+
+# Set environment variables to prevent Python from writing pyc files and buffering stdout/stderr
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
@@ -7,6 +17,17 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+
+# Stage 2: Run
+
+FROM python:3.9-alpine
+
+RUN apk add --no-cache libffi openssl
+
+COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+COPY --from=builder /app /app
+
+WORKDIR /app
 
 # Set environment variables to prevent Python from writing pyc files and buffering stdout/stderr
 ENV PYTHONDONTWRITEBYTECODE=1
