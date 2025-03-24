@@ -83,6 +83,7 @@ jobs:
           DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
           DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
           DEBUG: ${{ secrets.DEBUG }}
+        if: ${{ github.event_name != 'push' }} # Skip deployment on push
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
