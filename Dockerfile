@@ -22,7 +22,6 @@ COPY . .
 # Stage 2: Run
 
 FROM python:3.9-alpine
-RUN python manage.py collectstatic --noinput
 RUN apk add --no-cache libffi openssl
 
 COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
@@ -37,6 +36,13 @@ ENV PYTHONUNBUFFERED=1
 
 # Expose the port that the application will run on (adjust if necessary)
 EXPOSE 8000
+
+# Use an entrypoint script for initializing tasks
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Set the entrypoint script
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Run the application (Django example, replace with your Flask command if needed)
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "client_management_system.wsgi:application"]
