@@ -14,17 +14,19 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
 # Stage 2: Run
 
 FROM python:3.9-alpine
-
+RUN python manage.py collectstatic --noinput
 RUN apk add --no-cache libffi openssl
 
 COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
 COPY --from=builder /app /app
 
 WORKDIR /app
