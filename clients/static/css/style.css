@@ -270,3 +270,11 @@ table th {
   background-color: #5a6268;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
 }
+
+/* Footer with Pod name */
+footer.pod-footer {
+  text-align: center;
+  padding: 1em 0;
+  color: gray;
+  font-size: 0.9em;
+}
