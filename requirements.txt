@@ -1,5 +1,5 @@
 asgiref==3.8.1
-cffi==1.16.0
+cffi==1.17.1
 cryptography==43.0.0
 Django==4.2.16
 pycparser==2.22
