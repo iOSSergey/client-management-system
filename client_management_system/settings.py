@@ -40,6 +40,10 @@ DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
 ALLOWED_HOSTS = ['localhost', '127.0.0.1',
                  'pavlyuk.online', 'www.pavlyuk.online']
 
+# Add additional hosts from environment variable
+extra_hosts = os.getenv('ALLOWED_HOSTS', '')
+if extra_hosts:
+    ALLOWED_HOSTS += extra_hosts.split(',')
 
 # Application definition
 
