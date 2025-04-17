@@ -22,3 +22,6 @@ scripts/
 
 # Ignore static files collected by collectstatic
 /staticfiles/
+
+# Ignore builds directory
+builds/
