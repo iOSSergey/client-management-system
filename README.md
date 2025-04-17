@@ -42,9 +42,11 @@ Visit http://127.0.0.1:8000/ in your web browser to view the application.
 ## Running with Docker
 
 To run the application using Docker, use the following command:
+
 ```bash
 docker run -d -p 8000:8000 --name cms --env-file .env client_management_system:latest
 ```
+
 This will run the application in a detached mode, exposing it on port 8000, and load environment variables from the `.env` file.
 
 ## Contributing
@@ -54,4 +56,3 @@ Feel free to contribute to this project by submitting pull requests or reporting
 ## Contact
 
 For any questions or inquiries, please visit https://pavlyuk.online
-
