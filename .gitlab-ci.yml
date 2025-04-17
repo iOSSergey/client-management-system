@@ -13,10 +13,10 @@ build_job:
   stage: build
   script:
     - echo "Building project..."
-    - echo "Build successful!"
+    - echo "Done!"
 
 deploy_job:
   stage: deploy
   script:
     - echo "Deploying application..."
-    - echo "Deployment completed!"
+    - echo "Done!"
