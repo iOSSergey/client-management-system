@@ -34,6 +34,9 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# Add version number as a label
+LABEL version="2025.05.08"
+
 # Expose the port that the application will run on (adjust if necessary)
 EXPOSE 8000
 
