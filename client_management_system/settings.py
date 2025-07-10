@@ -37,8 +37,11 @@ if not SECRET_KEY:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',
-                 'pavlyuk.online', 'www.pavlyuk.online']
+# ALLOWED_HOSTS using os.getenv
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1',
+#                  'pavlyuk.online', 'www.pavlyuk.online']
 
 
 # Application definition
@@ -161,9 +164,12 @@ REST_FRAMEWORK = {
     ]
 }
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://localhost',
-    'https://127.0.0.1',
-    'https://pavlyuk.online',
-    'https://www.pavlyuk.online',
-]
+# CSRF_TRUSTED_ORIGINS using os.getenv
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://localhost,https://127.0.0.1').split(',')
+
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://localhost',
+#     'https://127.0.0.1',
+#     'https://pavlyuk.online',
+#     'https://www.pavlyuk.online',
+# ]
