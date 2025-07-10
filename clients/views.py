@@ -3,6 +3,7 @@ from django.db.models import Count, Q
 from .models import Client
 from .forms import ClientForm
 from datetime import datetime
+from django.http import JsonResponse
 
 
 def latest_clients(request):
@@ -105,3 +106,8 @@ def edit_client(request, client_id):
     else:
         form = ClientForm(instance=client)
     return render(request, 'clients/edit_client.html', {'form': form, 'client': client})
+
+
+def health_check(request):
+    # A simple health check view that returns a 200 OK response
+    return JsonResponse({'status': 'ok'})

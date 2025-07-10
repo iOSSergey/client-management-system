@@ -8,5 +8,6 @@ urlpatterns = [
     path('search/', views.search_clients, name='search_clients'),
     path('add-client/', views.add_client, name='add_client'),
     path('clients/<int:client_id>/edit/', views.edit_client, name='edit_client'),
+    path('health/', views.health_check, name='health_check'),
 ]
 
